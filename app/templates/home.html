@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil - Nuit de l'Info{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Bienvenue à la Nuit de l'Info 2024</h1>
+
+    <!-- Compte à rebours -->
+    <div id="countdown" class="hero">
+        <h2>Temps restant pour créer ou rejoindre une équipe</h2>
+        <p id="timer">Calcul en cours...</p>
+        <a href="{{ url_for('main.teams') }}"> → Créer ou rejoindre une équipe</a>
+    </div>
+
+    <!-- Informations principales -->
+    <section id="home">
+        <h2>ESIROI</h2>
+        <p>
+            Cette année, l'événement se déroule à <strong>l'ESIROI</strong>, Saint-Pierre.
+        </p>
+        <p><strong>Adresse :</strong> 40 Avenue de Soweto, 97410 Saint-Pierre, La Réunion.</p>
+        <p><strong>Rendez-vous :</strong> Jeudi 5 décembre 2024 à 18h00 en A100.</p>
+        <br>
+        <p>
+            La Nuit de l'Info est un événement unique où étudiants, enseignants et entreprises collaborent
+            pour développer une application en une nuit. Une nuit d'innovation, de défis et de rencontres !
+        </p>
+        <a href="{{ url_for('main.program') }}"> → Consulter le programme</a>
+    </section>
+
+
+
+    <!-- Section des règles du jeu -->
+    <section id="rules">
+        <h2>Règles du Jeu</h2>
+        <ul>
+            <li><strong>Respect :</strong> Chaque participant doit respecter les autres membres, les organisateurs et
+                les règles de l'événement.</li>
+            <li><strong>Esprit d'équipe :</strong> Travailler en collaboration est essentiel pour réussir les défis.
+            </li>
+            <li><strong>Fair-play :</strong> Toute tentative de tricherie ou d'utilisation de moyens déloyaux est
+                interdite.</li>
+            <li><strong>Créativité :</strong> Profitez de cet événement pour innover et exprimer vos idées sans limites.
+            </li>
+            <li><strong>Sécurité :</strong> Respectez les consignes de sécurité sur le lieu de l’événement.</li>
+            <li><strong>Respect des délais :</strong> Les livrables doivent être soumis avant les horaires fixés.</li>
+        </ul>
+        <p>Ces règles garantissent une nuit agréable et productive pour tous. Merci de les respecter !</p>
+    </section>
+
+</div>
+
+<script>
+    // Script pour le compte à rebours
+    function updateCountdown() {
+        const deadline = new Date("2024-11-30T00:00:00+03:00");
+        const now = new Date();
+        const diff = deadline - now;
+
+        if (diff <= 0) {
+            document.getElementById('timer').textContent = "Le délai pour créer ou rejoindre une équipe est expiré.";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('timer').textContent = `${days}j ${hours}h ${minutes}min ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); 
+</script>
+{% endblock %}

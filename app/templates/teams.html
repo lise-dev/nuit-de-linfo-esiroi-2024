@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestion des équipes - Nuit de l'Info{% endblock %}
+
+{% block content %}
+<h1>Gestion des équipes</h1>
+
+<div class="team-management-container">
+    <!-- Section pour créer une équipe -->
+    <section class="team-section">
+        <h2>Créer une équipe</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="create">
+
+            <label for="team_name">Nom de l'Équipe :</label>
+            <input type="text" id="team_name" name="team_name" required>
+
+            <label for="leader_id">Chef d'Équipe :</label>
+            <select id="leader_id" name="leader_id" required>
+                <option value="" disabled selected>Choisissez un étudiant</option>
+                {% for student in students %}
+                <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Créer l'équipe</button>
+        </form>
+    </section>
+
+    <!-- Section pour rejoindre une équipe -->
+    <section class="team-section">
+        <h2>Rejoindre une équipe</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="join">
+
+            <label for="team_id">Équipe :</label>
+            <select id="team_id" name="team_id" required>
+                <option value="" disabled selected>Choisissez une équipe</option>
+                {% for team in teams %}
+                <option value="{{ team.id }}">{{ team.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="student_id">Étudiant :</label>
+            <select id="student_id" name="student_id" required>
+                <option value="" disabled selected>Choisissez un étudiant</option>
+                {% for student in students %}
+                <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Rejoindre l'équipe</button>
+        </form>
+    </section>
+</div>
+
+<!-- Liste des équipes existantes -->
+
+<section class="teams-list border-dashed">
+    <h2>Équipes Existantes</h2>
+    <ul class="team-list">
+        {% for team in teams %}
+        <li>
+            <h3>{{ team.name }}</h3>
+            <p><strong>Chef d'équipe :</strong> {{ team.leader.first_name }} {{ team.leader.last_name }} ({{
+                team.leader.school }})</p>
+            <ul class="member-list">
+                {% for member in team.members %}
+                <li>
+                    {{ member.first_name }} {{ member.last_name }} - {{ member.school }}
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+
+
+
+{% endblock %}
