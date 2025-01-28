@@ -56,7 +56,6 @@ pip install -r requirements.txt
 
 ![screenshot](./app/static/screenshot03.png)
 
-![screenshot](./app/static/screenshot04.png)
 
 I Participated and organized the "Nuit de l'Info - ESIROI 2024," a 24-hour hackathon to develop innovative digital solutions.
 I Promoted the event within the University of La Réunion, helped create teams, and managed the program schedule.
